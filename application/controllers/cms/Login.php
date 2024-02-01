@@ -32,9 +32,11 @@ class Login extends Admin_core_controller {
     $email = $this->input->post('email');
     $password = $this->input->post('password');
 
+    // var_dump(password_verify($password, $res->password)); die();
+
     $res = $this->login->getByEmail($email);
     if($res && password_verify($password, $res->password)){
-      $this->session->set_userdata(['role' => 'administrator', 'id' => $res->id, 'name' => $res->name]);
+      $this->session->set_userdata(['role' => 'administrator', 'id' => $res->id, 'fname' => $res->fname]);
       redirect('cms/dashboard');
     } else {
       $this->session->set_flashdata('login_msg', ['message' => 'Incorrect email or password', 'color' => 'red']);

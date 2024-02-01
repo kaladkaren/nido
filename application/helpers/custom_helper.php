@@ -11,3 +11,7 @@ function api_url($class)
 {
   return base_url() . "api/" . strtolower(get_class($class)) . "/";
 }
+
+function get_roles($that){
+	return $that->db->get('tbl_role')->result();
+}

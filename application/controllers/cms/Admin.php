@@ -12,16 +12,25 @@ class Admin extends Admin_core_controller {
 
   public function index()
   {
-    $this->dashboard();
-  }
-
-  public function dashboard()
-  {
-    $res = $this->admin_model->all();
+    $res = $this->admin_model->user_list();
+    $data['total_pages'] = $this->admin_model->getTotalPages();
 
     $data['res'] = $res;
-    $this->wrapper('cms/index', $data);
+    $this->wrapper('cms/users', $data);
   }
+
+
+  public function profile()
+  {
+    $user_details = $this->admin_model->get_user_details();
+
+    $data['user_details'] = $user_details;
+    $data['uses_uploaded_data'] = array();
+    $data['total_pages'] = count($data['uses_uploaded_data']);
+    
+    $this->wrapper('cms/profile', $data);
+  }
+
 
   public function add()
   {
@@ -43,12 +52,22 @@ class Admin extends Admin_core_controller {
     $this->admin_redirect('cms');
   }
 
-  public function delete()
+  public function deactivate()
   {
-    if($this->admin_model->delete($this->input->post('id', true))){
-      $this->session->set_flashdata('flash_msg', ['message' => 'User disabled successfully', 'color' => 'green']);
+    if($this->admin_model->deactivate($this->input->post('id', true))){
+      $this->session->set_flashdata('flash_msg', ['message' => 'User deactivated successfully', 'color' => 'green']);
     } else {
-      $this->session->set_flashdata('flash_msg', ['message' => 'Error deleting user.', 'color' => 'red']);
+      $this->session->set_flashdata('flash_msg', ['message' => 'Error deactivating user.', 'color' => 'red']);
+    }
+    $this->admin_redirect('cms');
+  }
+
+  public function activate()
+  {
+    if($this->admin_model->activate($this->input->post('id', true))){
+      $this->session->set_flashdata('flash_msg', ['message' => 'User activated successfully!', 'color' => 'green']);
+    } else {
+      $this->session->set_flashdata('flash_msg', ['message' => 'Error activating user.', 'color' => 'red']);
     }
     $this->admin_redirect('cms');
   }

@@ -64,6 +64,7 @@ $route['cms'] = 'cms/dashboard';
 
 # My routes
 $route['api/example/(:num)'] = 'api/example/single/$1';
+$route['api/user/(:num)/batch-registration'] = 'api/registration_api/register/$1';
 
 $route['migrate/(:any)'] = 'migrate/index/$1';
 

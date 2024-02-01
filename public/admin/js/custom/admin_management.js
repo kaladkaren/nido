@@ -5,19 +5,27 @@ $(document).ready(function() {
     $('#main-form')[0].reset() // reset the form
     const payload = $(this).data('payload')
 
-    $('input[name=name]').removeAttr('required')
-    $('input[name=email]').removeAttr('required')
-    $('select[name=role]').removeAttr('required')
-    $('input[name=password]').removeAttr('required')
-    $('input[id=confirm_password]').removeAttr('required')
+    // $('input[name=fname]').removeAttr('required');
+    // $('input[name=lname]').removeAttr('required');
+    // $('input[name=email]').removeAttr('required');
+    // $('select[name=role]').removeAttr('required');
+    // $('input[name=password]').removeAttr('required');
+    // $('input[id=confirm_password]').removeAttr('required');
 
-    $('input[name=name]').val(payload.name)
-    $('input[name=email]').val(payload.email)
+    $('input[name=fname]').val(payload.fname);
+    $('input[name=lname]').val(payload.lname);
+    $('input[name=email]').val(payload.email);
 
-    $('select[name=role] option').each(function() {
-      $(this).removeAttr('selected')
-    });
-    $('select[name=role] option').filter(function () { return $(this).html() == payload.role; }).attr('selected', 'selected')
+
+    $('input[name=fname]').attr('required', 'required');
+    $('input[name=lname]').attr('required', 'required');
+    $('input[name=email]').attr("required", 'required');
+    $('select[name=role]').attr("required", 'required');
+
+    // $('select[name=role] option').each(function() {
+    //   $(this).removeAttr('selected')
+    // });
+    $('select[name=role] option').filter(function () { return $(this).val() == payload.role_id; }).attr('selected', 'selected')
 
     $('#main-form').attr('action', base_url + 'cms/admin/update/' + payload.id)
     
@@ -28,11 +36,12 @@ $(document).ready(function() {
     $('.modal').modal()
     $('#main-form')[0].reset() // reset the form
 
-    $('input[name=name]').attr('required', 'required')
-    $('input[name=email]').attr("required", 'required')
-    $('select[name=role]').attr("required", 'required')
-    $('input[name=password]').attr("required", 'required')
-    $('input[id=confirm_password]').attr("required", 'required')
+    $('input[name=fname]').attr('required', 'required');
+    $('input[name=lname]').attr('required', 'required');
+    $('input[name=email]').attr("required", 'required');
+    $('select[name=role]').attr("required", 'required');
+    $('input[name=password]').attr("required", 'required');
+    $('input[id=confirm_password]').attr("required", 'required');
 
     $('#main-form').attr('action', base_url + 'cms/admin/add')
 
@@ -43,16 +52,28 @@ $(document).ready(function() {
   })
 
   //Deleting
-  $('.btn-delete').on('click', function(){
+  $('.btn-deactivate').on('click', function(){
 
-    let p = prompt("Are you sure you want to delete this? Type DELETE to continue", "");
-    if (p === 'DELETE') {
+    let p = prompt("Are you sure you want to deactivate this access? Type YES to continue", "");
+    if (p === 'YES') {
       const id = $(this).data('id')
 
-      invokeForm(base_url + 'cms/admin/delete', {id: id,  __x_uid: x_uid});
+      invokeForm(base_url + 'cms/admin/deactivate', {id: id});
     }
 
   })
+
+  $('.btn-activate').on('click', function(){
+
+    let p = prompt("Are you sure you want to activate this access? Type YES to continue", "");
+    if (p === 'YES') {
+      const id = $(this).data('id')
+
+      invokeForm(base_url + 'cms/admin/activate', {id: id});
+    }
+
+  })
+
 
   $('#main-form').on('submit', function (){
 
