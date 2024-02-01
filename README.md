@@ -49,7 +49,7 @@ Authorization: Basic YWRtaW46S2FyZW5NYWdhbmRh
 }
 ```
 
-### Batch Upload Registration
+### Registration
 **POST:** _api/user/{user_id}/batch-registration_
 
 |      Name      | Required |   Type    |    Description        |    Sample Data 
