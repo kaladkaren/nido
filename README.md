@@ -60,11 +60,11 @@ Authorization: Basic YWRtaW46S2FyZW5NYWdhbmRh
 |  email[]      |  yes     |  varchar |      | admin@gmail.com
 |  birthday[]      |  yes     |  date |      | 1998-11-10
 |  relationship[]      |  yes     |  int |      | 1- parent, 2 - guardian
-|  number_of_children[]      |  yes     |      |  int | 1
-|  current_brand_milk[]      |  yes     |      |  varchar | Bonakid
+|  number_of_children[]      |  yes     | int     |   | 1
+|  child_ages[]      |  yes     | varchar     |   | 4 and 5
+|  current_brand_milk[]      |  yes     | varchar     |   | Bonakid
 |  signature[]      |  yes     |  text |      | karen_cute.jpeg
 |  registration_etimestamp[]      |  yes     |  datetime |      | 2024-01-20 20:43:02 - etimestamp of registration
-|  child_age[0][]      |  yes     |  int | child_age[_child_age_array_key_][] | SAMPLE: child_age[0][1], child_age[1][2]
 
 <strong>Response</strong>
 ```javascript
