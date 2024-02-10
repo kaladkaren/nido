@@ -50,6 +50,7 @@ class Registration_model_api extends Crud_model
 					      'birthday' => $data['birthday'][$i],
 					      'relationship' => $data['relationship'][$i],
 					      'number_of_children' => $data['number_of_children'][$i],
+					      'child_ages' => $data['child_ages'][$i],
 					      'current_brand_milk' => $data['current_brand_milk'][$i],
 					      'registration_etimestamp' => $data['registration_etimestamp'][$i],
 
@@ -67,20 +68,33 @@ class Registration_model_api extends Crud_model
 
 	public function add_registration($user_id, $data)
 	{
-		// $data_array = [
-		// 				  'ambassador_id' => $user_id,
-		// 			      'fname' => $data['fname'],
-		// 			      'lname' => $data['lname'],
-		// 			      'contact_num' => $data['contact_num'],
-		// 			      'email' => $data['email'],
-		// 			      'birthday' => $data['birthday'],
-		// 			      'relationship' => $data['relationship'],
-		// 			      'number_of_children' => $data['number_of_children'],
-		// 			      'current_brand_milk' => $data['current_brand_milk'],
-		// 			      'registration_etimestamp' => $data['registration_etimestamp'],
-		// 			      // 'signature' => $data['signature']
-		// 			    ];
-		$this->db->insert('tbl_registration', $data);
+		$data_array = [
+						  'ambassador_id' => $user_id,
+					      'fname' => $data['fname'],
+					      'lname' => $data['lname'],
+					      'contact_num' => $data['contact_num'],
+					      'email' => $data['email'],
+					      'birthday' => $data['birthday'],
+					      'relationship' => $data['relationship'],
+					      'number_of_children' => $data['number_of_children'],
+					      'child_ages' => $data['child_ages'],
+					      'current_brand_milk' => $data['current_brand_milk'],
+					      'registration_etimestamp' => $data['registration_etimestamp'],
+					      // 'signature' => $data['signature']
+					    ];
+		$this->db->insert('tbl_registration', $data_array);
+    	$last_insert_id = $this->db->insert_id();
+
+    	// for ($i=0; $i < count($data['child_age']); $i++) {
+    	// 	$this->add_child_ages($last_insert_id, $data['child_age'][$i]);
+    	// }
+
+    	return $last_insert_id;
+	}
+
+	function add_child_ages($registration_id, $child_age)
+	{
+		$this->db->insert('tbl_children_ages', ['registration_id' => $registration_id, 'children_age' => $child_age]);
     	return $this->db->insert_id();
 	}
 

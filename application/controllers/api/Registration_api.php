@@ -29,10 +29,11 @@ class Registration_api extends Crud_controller
   public function register_post($user_id)
   {
   	// var_dump($_FILES['signature']);
+   //  var_dump($user_id);
   	// var_dump($this->input->post());
   	// die();
 
-  	$attachments = $this->registration_model_api->batch_upload($_FILES['signature']);
+  	$attachments = $this->registration_model_api->batch_upload(@$_FILES['signature']);
 
   	// var_dump($attachments['name'][0]); die();
   	$res = [];
@@ -41,6 +42,7 @@ class Registration_api extends Crud_controller
 
 	    $res[] = $this->registration_model_api->add_registration($user_id, 
 					[
+              'ambassador_id' => $user_id,
 				      'fname' => $data['fname'][$i],
 				      'lname' => $data['lname'][$i],
 				      'contact_num' => $data['contact_num'][$i],
@@ -48,12 +50,13 @@ class Registration_api extends Crud_controller
 				      'birthday' => $data['birthday'][$i],
 				      'relationship' => $data['relationship'][$i],
 				      'number_of_children' => $data['number_of_children'][$i],
+              'child_ages' => $data['child_ages'][$i],
 				      'current_brand_milk' => $data['current_brand_milk'][$i],
 				      'registration_etimestamp' => $data['registration_etimestamp'][$i],
-				      'signature' => $attachments['name'][$i]
+				      // 'signature' => @$attachments['name'][$i],
 				    ]
-		);
-	}
+  		);
+  	}
 
   	// $res = $this->registration_model_api->insertBatchRegistration($user_id, $this->input->post());
 
