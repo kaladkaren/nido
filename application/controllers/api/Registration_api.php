@@ -50,9 +50,12 @@ class Registration_api extends Crud_controller
 				      'birthday' => $data['birthday'][$i],
 				      'relationship' => $data['relationship'][$i],
 				      'number_of_children' => $data['number_of_children'][$i],
-              'child_ages' => $data['child_ages'][$i],
+              'child_age' => $data['child_age'][$i],
 				      'current_brand_milk' => $data['current_brand_milk'][$i],
 				      'registration_etimestamp' => $data['registration_etimestamp'][$i],
+              'province_id' => $data['province_id'][$i],
+              'city_id' => $data['city_id'][$i],
+              'brgy_id' => $data['brgy_id'][$i],
 				      // 'signature' => @$attachments['name'][$i],
 				    ]
   		);
@@ -79,6 +82,67 @@ class Registration_api extends Crud_controller
       ];
 
       $this->response($response, 400);
+    }
+  }
+
+  public function provinces_get()
+  {
+    $res = $this->registration_model_api->get_provinces();
+
+    $response = (object)[];
+    $response->data = $res; 
+    $response->meta = (object)[
+      'message' => 'Successfully fetch.',
+      'code' => 'ok',
+      'status' => 200
+    ];
+
+    $this->response($response, 200);
+  }
+
+  public function cities_get($prov_code)
+  {
+    $res = $this->registration_model_api->get_cities($prov_code);
+
+    $response = (object)[];
+    $response->data = $res; 
+    $response->meta = (object)[
+      'message' => 'Successfully fetch.',
+      'code' => 'ok',
+      'status' => 200
+    ];
+
+    $this->response($response, 200);
+  }
+
+  public function barangay_get($city_code)
+  {
+    $res = $this->registration_model_api->get_barangay($city_code);
+
+    $response = (object)[];
+    $response->data = $res; 
+    $response->meta = (object)[
+      'message' => 'Successfully fetch.',
+      'code' => 'ok',
+      'status' => 200
+    ];
+
+    $this->response($response, 200);
+  }
+
+  # ADRIAN CODE
+  function get_ambassadors_get()
+  {
+    $ambasaddors = $this->registration_model_api->getAmabassadors();
+    $res = (object)[];
+    if ($ambasaddors) {
+      $res->data = $ambasaddors;
+      $res->meta = (object)['message' => 'Succesful fetch', 'code' => 'ok', 'status' => 200];
+      $this->response($res, 200);
+    } else {
+      $res->data = (object)[];
+      $res->meta = (object)['message' => 'Invalid credentials', 'code' => 'invalid_credentials', 'status' => 409];
+      $this->response($res, 409);
     }
   }
 

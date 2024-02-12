@@ -1082,6 +1082,9 @@ body .markdown-body
 <ul>
 <li><a href="#sign-in">Login</a></li>
 <li><a href="#registration">Registration</a></li>
+<li><a href="#provinces">Provinces</a></li>
+<li><a href="#cities">Cities</a></li>
+<li><a href="#barangay">Barangay</a></li>
 </ul>
 <h3 id="sign-in">Sign-in<a class="headerlink" href="#sign-in" title="Permanent link"></a></h3>
 <p><strong>POST:</strong> <em>api/registration_api/sign_in</em></p>
@@ -1206,11 +1209,11 @@ body .markdown-body
 <td>1</td>
 </tr>
 <tr>
-<td>child_ages[]</td>
+<td>child_age[]</td>
 <td>yes</td>
 <td>varchar</td>
-<td></td>
-<td>4 and 5</td>
+<td>Comma separted number value</td>
+<td>3,4,5</td>
 </tr>
 <tr>
 <td>current_brand_milk[]</td>
@@ -1233,6 +1236,27 @@ body .markdown-body
 <td></td>
 <td>2024-01-20 20:43:02 - etimestamp of registration</td>
 </tr>
+<tr>
+<td>province_id[]</td>
+<td>yes</td>
+<td>int</td>
+<td>will get from + <a href="#provinces">Provinces</a> responce</td>
+<td>21</td>
+</tr>
+<tr>
+<td>city_id[]</td>
+<td>yes</td>
+<td>int</td>
+<td>will get from + <a href="#cities">Cities</a> responce</td>
+<td>489</td>
+</tr>
+<tr>
+<td>brgy_id[]</td>
+<td>yes</td>
+<td>int</td>
+<td>will get from + <a href="#barangay">Barangay</a> responce</td>
+<td>12677</td>
+</tr>
 </tbody>
 </table>
 <p><strong>Response</strong>
@@ -1242,6 +1266,261 @@ body .markdown-body
         <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Registered successfully.&quot;</span><span class="p">,</span>
         <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
         <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="mi">201</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></p>
+<h3 id="provinces">Provinces<a class="headerlink" href="#provinces" title="Permanent link"></a></h3>
+<p><strong>GET:</strong> <em>api/registration_api/provinces</em></p>
+<p><strong>Response</strong>
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;015500000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;PANGASINAN&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;01&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0155&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;active&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;11&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;031400000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;BULACAN&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;03&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0314&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;active&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;21&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045800000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;RIZAL&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;active&quot;</span><span class="o">:</span> <span class="s2">&quot;1&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;meta&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Successfully fetch.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="mi">200</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></p>
+<h3 id="cities">Cities<a class="headerlink" href="#cities" title="Permanent link"></a></h3>
+<p><strong>GET:</strong> <em>api/registration_api/cities/{provCode}</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+<th>Sample Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>provCode</td>
+<td>yes</td>
+<td>varchar</td>
+<td>will get from + <a href="#provinces">Provinces</a> responce</td>
+<td>0458</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong>
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;477&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045801000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;ANGONO&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045801&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;478&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045802000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;CITY OF ANTIPOLO&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045802&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;479&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045803000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;BARAS&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045803&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;480&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045804000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;BINANGONAN&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045804&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;481&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045805000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;CAINTA&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045805&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;482&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045806000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;CARDONA&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045806&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;483&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045807000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;JALA-JALA&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045807&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;484&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045808000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;RODRIGUEZ (MONTALBAN)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045808&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;485&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045809000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;MORONG&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045809&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;486&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045810000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;PILILLA&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045810&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;487&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045811000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;SAN MATEO&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045811&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;488&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045812000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;TANAY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045812&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;489&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;TAYTAY&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;490&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;psgcCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045814000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;TERESA&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045814&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;meta&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Successfully fetch.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="mi">200</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div></p>
+<h3 id="barangay">Barangay<a class="headerlink" href="#barangay" title="Permanent link"></a></h3>
+<p><strong>GET:</strong> <em>api/registration_api/barangay/{citymunCode}</em></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Required</th>
+<th>Type</th>
+<th>Description</th>
+<th>Sample Data</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>citymunCode</td>
+<td>yes</td>
+<td>varchar</td>
+<td>will get from + <a href="#cities">Cities</a> responce</td>
+<td>045813</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Response</strong>
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="s2">&quot;data&quot;</span><span class="o">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;12676&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813001&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;Dolores (Pob.)&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;12677&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813002&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;Muzon&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;12678&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813003&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;San Isidro&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;12679&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813004&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;San Juan&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+            <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="s2">&quot;12680&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813005&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;brgyDesc&quot;</span><span class="o">:</span> <span class="s2">&quot;Santa Ana&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;regCode&quot;</span><span class="o">:</span> <span class="s2">&quot;04&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;provCode&quot;</span><span class="o">:</span> <span class="s2">&quot;0458&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;citymunCode&quot;</span><span class="o">:</span> <span class="s2">&quot;045813&quot;</span>
+        <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;meta&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s2">&quot;message&quot;</span><span class="o">:</span> <span class="s2">&quot;Successfully fetch.&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;code&quot;</span><span class="o">:</span> <span class="s2">&quot;ok&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;status&quot;</span><span class="o">:</span> <span class="mi">200</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div></p></article></body></html>

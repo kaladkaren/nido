@@ -77,17 +77,21 @@ class Registration_model_api extends Crud_model
 					      'birthday' => $data['birthday'],
 					      'relationship' => $data['relationship'],
 					      'number_of_children' => $data['number_of_children'],
-					      'child_ages' => $data['child_ages'],
+					      'child_ages' => $data['child_age'],
 					      'current_brand_milk' => $data['current_brand_milk'],
 					      'registration_etimestamp' => $data['registration_etimestamp'],
+					      'province_id' => $data['province_id'],
+					      'city_id' => $data['city_id'],
+					      'brgy_id' => $data['brgy_id'],
 					      // 'signature' => $data['signature']
 					    ];
 		$this->db->insert('tbl_registration', $data_array);
     	$last_insert_id = $this->db->insert_id();
 
-    	// for ($i=0; $i < count($data['child_age']); $i++) {
-    	// 	$this->add_child_ages($last_insert_id, $data['child_age'][$i]);
-    	// }
+    	$child_age = explode(',', $data['child_age']);
+    	for ($i=0; $i < count($child_age); $i++) {
+	        $this->add_child_ages($last_insert_id, $data['child_age'][$i]);
+	    }
 
     	return $last_insert_id;
 	}
@@ -123,5 +127,29 @@ class Registration_model_api extends Crud_model
 
 	}
 
+	function get_provinces()
+	{
+		$this->db->where('active', 1);
+		return $this->db->get('refprovince')->result();
+	}
+
+	function get_cities($prov_code)
+	{
+		$this->db->where('provCode', $prov_code);
+		return $this->db->get('refcitymun')->result();
+	}
+
+	function get_barangay($city_code)
+	{
+		$this->db->where('citymunCode', $city_code);
+		return $this->db->get('refbrgy')->result();
+	}
+
+	# ADRIAN CODE
+	public function getAmabassadors() 
+	{
+		$query = $this->db->query("select id, email, password, fname, mname, lname, active from admin");
+		return $query->result_array();
+	}
 
 }
