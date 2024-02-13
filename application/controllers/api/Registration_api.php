@@ -54,8 +54,10 @@ class Registration_api extends Crud_controller
 				      'current_brand_milk' => $data['current_brand_milk'][$i],
 				      'registration_etimestamp' => $data['registration_etimestamp'][$i],
               'province_id' => $data['province_id'][$i],
-              'city_id' => $data['city_id'][$i],
-              'brgy_id' => $data['brgy_id'][$i],
+              // 'city_id' => $data['city_id'][$i],
+              // 'brgy_id' => $data['brgy_id'][$i],
+              'city' => $data['city'][$i],
+              'barangay' => $data['barangay'][$i],
 				      // 'signature' => @$attachments['name'][$i],
 				    ]
   		);

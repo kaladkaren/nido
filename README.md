@@ -71,6 +71,8 @@ Authorization: Basic YWRtaW46S2FyZW5NYWdhbmRh
 |  province_id[]       |  yes     |  int | will get from + [Provinces](#provinces) responce      |  21
 |  city_id[]       |  yes     |  int | will get from + [Cities](#cities) responce      |  489
 |  brgy_id[]       |  yes     |  int | will get from + [Barangay](#barangay) responce      |  12677
+|  city[]       |  yes     |  varchar |      |  Taytay
+|  barangay[]       |  yes     |  varchar |      |  Muzon
 
 <strong>Response</strong>
 ```javascript
