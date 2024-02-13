@@ -12,18 +12,18 @@
           </header>
           
           <div class="panel-body">
-            <form method="POST" action="<?php echo base_url('cms/admin/update'); ?>" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo base_url('cms/admin/update/') . $this->session->userdata('id'); ?>" enctype="multipart/form-data" id="main-form">
               <div class="form-group">
               	<div class="row">
 
               		<div class="col-md-6">
               			<label>First Name:</label>
-	                  	<input type="text" class="form-control" name="title" required="required" value="<?php echo $user_details->fname; ?>">
+	                  	<input type="text" class="form-control" name="fname" required="required" value="<?php echo $user_details->fname; ?>">
               		</div>
                   	
                   	<div class="col-md-6">
-						<label>Last Name:</label>
-	                  	<input type="text" class="form-control" name="title" required="required" value="<?php echo $user_details->lname; ?>">
+						          <label>Last Name:</label>
+	                  	<input type="text" class="form-control" name="lname" required="required" value="<?php echo $user_details->lname; ?>">
                   	</div>
 
                 </div>
@@ -33,7 +33,7 @@
               	<div class="row">
               		<div class="col-md-12">
 	          			<label>Email Address:</label>
-	                  	<input type="text" class="form-control" name="title" required="required" value="<?php echo $user_details->email; ?>">
+	                  	<input type="text" class="form-control" name="email" required="required" value="<?php echo $user_details->email; ?>">
 	                </div>
                 </div>
               </div>
@@ -43,7 +43,7 @@
               	<div class="row">
               		<div class="col-md-12">
 	          			<label>Password:</label>
-	                  	<input type="text" class="form-control" name="password" required="required" placeholder="Type password">
+	                  	<input type="password" class="form-control" name="password" required="required" placeholder="Type password">
 	                </div>
                 </div>
               </div>
@@ -52,7 +52,7 @@
               	<div class="row">
               		<div class="col-md-12">
 	          			<label>Confirm Password:</label>
-	                  	<input type="text" class="form-control" name="confirm_password" required="required" placeholder="Type match password">
+	                  	<input type="password" class="form-control" id="confirm_password" required="required" placeholder="Type match password">
 	                </div>
                 </div>
               </div>
@@ -77,190 +77,135 @@
               <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
             <?php endif; ?>
           </header>
+
           <div class="panel-body">
+
+            <!--state overview start-->
+            <div class="row state-overview">
+                
+                <div class="col-lg-12">
+                    <section class="panel">
+                        <div class="symbol" style="background: #FF6C60;">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="value">
+                            <h1 class="count2">
+                                <?php echo $total_registered; ?>
+                            </h1><br>
+                            <p>Total Registration Count</p>
+                        </div>
+                    </section>
+                </div>
+
+            </div>
+            <!--state overview end-->
+
             <div class="table-responsive" style="overflow: hidden; outline: none;" tabindex="1">
-              <table class="table table-bordered">
-                <thead>
+              <table class="table table-bordered table-striped table-condensed cf" id="dynamic-table2">
+                <thead class="cf">
                   <tr>
-                    <th>#</th>
-                    <th>Title</th>
-                    <th>Content</th>
-                    <th>Start Date</th>
-                    <th>End Date</th>
-                    <th>Action</th>
+                    <th>ID</th>
+                    <th>Firstname</th>
+                    <th>Lastname</th>
+                    <th>Relationship</th>
+                    <th>Contact #</th>
+                    <th>Email</th>
+                    <th>Birthday</th>
+                    <th># of 3-5yrs old Children</th>
+                    <th>Current Milk Brand</th>
+                    <th>Registration Date</th>
+                    <th>Ambassador</th>
+                    <!-- <th>Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
-                  <?php if (count($uses_uploaded_data) > 0 ): ?>
+                  
+                  <?php if (count($res) > 0 ): ?>
 
                     <?php $i = 1; foreach ($res as $key => $value): ?>
                       <tr>
-                        <th scope="row"><?php echo $i++ ?></th>
-                        <td><?php echo $value->title ?></td>
-                        <td><?php echo $value->content ?></td>
-                        <td><?php echo $value->start_date_f ?></td>
-                        <td><?php echo $value->end_date_f ?></td>
+                        <th scope="row"><?php echo $value->id ?></th>
+                        <th><?php echo $value->fname; ?></th>
+                        <td><?php echo $value->lname; ?></th>
+                        <td><?=$value->relationship == 1 ? 'Parent' : 'Guardian'; ?></td>
+                        <td><?php echo $value->contact_num; ?></td>
+                        <td><?php echo $value->email; ?></td>
+                        <td><?php echo $value->birthday; ?></td>
+                        <td><?php echo $value->number_of_children; ?></td>
+                        <td><?php echo $value->current_brand_milk; ?></td>
+                        <td><?php echo $value->registration_etimestamp; ?></td>
+                        <td><?php echo $value->ambassador_name; ?></td>
+                        <!-- <td>
+                            <input type="hidden" data-payload='<?php echo json_encode($value, JSON_HEX_APOS|JSON_HEX_QUOT); ?>'>
 
-                        <td>
-                          <button type="button"
-                          data-payload='<?php echo json_encode(['id' => $value->id, 'title' => $value->title, 'content' => $value->content, 'type' => $value->type, 'cover_photo' => $value->cover_photo, 'start_date' => $value->start_date, 'end_date' => $value->end_date, 'start_date_special' => $value->start_date_special, 'end_date_special' => $value->end_date_special])?>'
-                          class="edit-row btn btn-info btn-xs">Edit</button>
-                          <button type="button" data-id='<?php echo $value->id; ?>'
-                            class="btn btn-delete btn-danger btn-xs">Delete</button>
-                          </td>
-                        </tr>
-                      <?php endforeach; ?>
+                            <button style="margin-bottom: 5px;" type="button" class="edit-row btn btn-info btn-xs"><i class="fa fa-eye"></i> View Details</button><br>
+
+                            <button style="margin-bottom: 5px;" type="button" class="view-remarks btn btn-default btn-xs" name="button">
+                              <i class="fa fa-book"></i> View Remarks
+                            </button><br>
+
+                        </td> -->
+                      </tr>
+                    <?php endforeach; ?>
 
 
                     <?php else: ?>
                       <tr>
-                        <td colspan="6" style="text-align:center">Empty table data</td>
+                        <th scope="row"></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td style="text-align: center;">Empty Table</td>
+                        
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
                       </tr>
                     <?php endif; ?>
                   </tbody>
                 </table>
-
-                <style>
-                .active_lg {
-                  background: lightgray !important
-                }
-                </style>
-                <ul class="pagination">
-                    <?php
-                    $page = ($this->input->get('page')) ?: 1;
-
-                    # squery block
-                    $squery =  '';
-                    if ($this->input->get('squery')) {
-                      $squery = "&squery=" . $this->input->get('squery');
-                    }
-                    # / squery block
-
-                    for ($i=1; $i <= $total_pages; $i++) { ?>
-                      <li><a
-                        class="<?php echo ($i == $page) ? 'active_lg' : '' ?>"
-                        href="<?php echo base_url('cms')
-                        . "?page=" . $i . $squery;
-                        ?>"><?php echo $i ?></a></li>
-                      <?php } ?>
-                </ul>
-
               </div>
             </div>
+
           </section>
         </div>
       </div>
-      <!-- page end-->
-    </section>
+    <!-- page end-->
   </section>
+</section>
 
-  <!-- Modal -->
-  <div class="modal fade " id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title">Manage</h4>
-        </div>
-        <div class="modal-body">
+<script type="text/javascript">
+  $('#main-form').on('submit', function (){
 
-          <form role="form" method="post" id="main-form" enctype="multipart/form-data">
-            
-              <div class="form-group">
-                  <label>Title/Heading*</label>
-                  <input type="text" class="form-control" name="title" required="required" placeholder="Enter campaign/events/announcement name or heading">
-              </div>
+    let p = $('input[name=password]').val()
+    let cp = $('input[id=confirm_password]').val()
 
-              <div class="form-group">
-                  <label>Message*</label>
-                  <textarea class="form-control" name="content" style="height: 150px;" placeholder="Enter short details here ..." required></textarea>
-              </div>
+    if (!(p === cp)) {
+      alert('Passwords don\'t match')
+      return false
+    }
 
-              <div class="form-group">
-                  <label >Cover Photo *</label>
-                  <input type="file" class="form-control" name="cover_photo">
-              </div>
+  })
+</script>
 
-              <div class="form-group">
-                  <label>Type*</label>
-                  <select name="type" class="form-control" required>
-                    <option value="">Select</option>
-                    <option value="Static">Static</option>
-                    <option value="Dynamic">Dynamic</option>
-                  </select>
-              </div>
+<script src="<?php echo base_url('public/admin/js/custom/') ?>generic.js"></script>
 
-              <div class="form-group">
-                  <label >Start Date *</label>
-                  <input type="datetime-local" class="form-control" name="start_date" required>
-              </div>
+<script src="<?php echo base_url('public/admin/js/custom/') ?>generic.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/admin/'); ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/admin/'); ?>assets/bootstrap-inputmask/bootstrap-inputmask.min.js"></script>
+<script type="text/javascript" language="javascript" src="<?php echo base_url('public/admin/') ?>assets/advanced-datatable/media/js/jquery.dataTables.js"></script>
+<script type="text/javascript" src="<?php echo base_url('public/admin/') ?>assets/data-tables/DT_bootstrap.js"></script>
 
-              <div class="form-group">
-                  <label >End Date *</label>
-                  <input type="datetime-local" class="form-control" name="end_date" required>
-              </div>
-              
-              <div class="form-group">
-                  <label >Send Push Notif? *</label><br>
-                  <input type="checkbox" name="send_notif"> Check if you want to send push notification to every users.
-              </div>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('#dynamic-table2').dataTable( {
+      "aaSorting": [[ 0, "asc" ]]
+    } );
+  });
 
-        </div>
-          <div class="modal-footer">
-            <button data-dismiss="modal" class="btn btn-default" type="button">Close</button>
-            <input class="btn btn-info" type="submit" value="Save changes">
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-  <!-- modal -->
-
-  <script>
-    $(document).ready(function() {
-      //Updating
-      $('.edit-row').on('click', function(){
-        $('.modal').modal()
-        $('#main-form')[0].reset() // reset the form
-        const payload = $(this).data('payload')
-
-        $('input[name=title]').removeAttr('required')
-        $('textarea[name=content]').removeAttr('required')
-        $('input[name=cover_photo]').removeAttr('required')
-        $('input[name=start_date]').removeAttr('required')
-        $('input[name=end_date]').removeAttr('required')
-
-        $('input[name=title]').val(payload.title)
-        $('textarea[name=content]').val(payload.content)
-        // $('input[name=cover_photo]').val(payload.cover_photo)
-        $('input[name=start_date]').val(payload.start_date_special)
-        $('input[name=end_date]').val(payload.end_date_special)
-
-        $('select[name=type] option').each(function() {
-            $(this).removeAttr('selected')
-          });
-        $('select[name=type] option').filter(function () { return $(this).val() == payload.type; }).attr('selected', 'selected')
-
-        $('#main-form').attr('action', base_url + 'cms/events/update/' + payload.id)
-        
-      })
-
-      $('.modal').on('hidden.bs.modal', function () {
-        $('select[name=type] option:selected').removeAttr('selected');
-      })
-
-      //Deleting
-      $('.btn-delete').on('click', function(){
-
-        let p = prompt("Are you sure you want to delete this? Type DELETE to continue", "");
-        if (p === 'DELETE') {
-          const id = $(this).data('id')
-
-          invokeForm(base_url + 'cms/events/delete', {id: id});
-        }
-
-      })
-
-    })
-  </script>
-  <script src="<?php echo base_url('public/admin/js/custom/') ?>generic.js"></script>
+  $('#dynamic-table2_filter').find('input').attr('placeholder','Customer Name')
+  $('#dynamic-table2_filter').find('input').attr('style','font-size:12px;')
+  
+</script>

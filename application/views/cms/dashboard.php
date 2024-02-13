@@ -39,7 +39,7 @@
                         </div>
                         <div class="value">
                             <h1 class="count2">
-                                <?php echo $total_sales; ?>
+                                <?php echo $total_registered; ?>
                             </h1><br>
                             <p>Total Registration Count</p>
                         </div>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="value">
                             <h1 class="count3">
-                                <?php echo $total_items; ?>
+                                <?php echo $ambassador_count; ?>
                             </h1><br>
                             <p>Number of Active Ambassador</p>
                         </div>

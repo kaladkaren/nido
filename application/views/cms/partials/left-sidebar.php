@@ -33,14 +33,14 @@
 
         <li>
           <a href="<?php echo base_url('cms') ?>"
-            class="<?php echo $this->uri->segment(1) === 'cms' && $this->uri->segment(2) === null ? 'active': ''; ?>">
+            class="<?php echo $this->uri->segment(1) === 'cms' && ($this->uri->segment(2) === null || $this->uri->segment(2) === 'dashboard') ? 'active': ''; ?>">
             <i class="fa fa-users"></i>
             <span>Dashboard</span>
           </a>
         </li>
 
         <li>
-          <a href="<?php echo base_url('cms/admin/profile') ?>"
+          <a href="<?php echo base_url('cms/admin/profile?ambassador_id=') . $this->session->userdata('id')?>"
             class="<?php echo $this->uri->segment(1) === 'cms' &&  $this->uri->segment(2) === 'admin' && $this->uri->segment(3) === 'profile' ? 'active': ''; ?>">
             <i class="fa fa-user"></i>
             <span>My Profile</span>
@@ -53,6 +53,35 @@
             class="<?php echo $this->uri->segment(1) === 'cms' && ($this->uri->segment(2) === 'admin' && $this->uri->segment(3) === null) ? 'active': ''; ?>">
             <i class="fa fa-users"></i>
             <span>User Management</span>
+          </a>
+        </li>
+
+        <li class="sub-menu">
+            <a href="javascript:;" class="<?php echo (in_array($this->uri->segment(3), ['eso', 'batchcode']))  ? 'active': ''; ?>">
+              <i class="fa fa-dropbox"></i>
+              <span>ESO / Batchcode <br> Management</span>
+            </a>
+            <ul class="sub" >
+              <li><a <?php echo $this->uri->segment(3) === 'eso' && $this->uri->segment(2) === 'admin' ? 'style="color:#ff6c60"': ''; ?> href="<?php echo base_url('cms/admin/eso') ?>">ESO</a></li>
+              <li><a <?php echo $this->uri->segment(3) === 'batchcode' && $this->uri->segment(2) === 'admin' ? 'style="color:#ff6c60"': ''; ?> href="<?php echo base_url('cms/admin/batchcode') ?>">Batchcodes</a></li>
+
+            </ul>
+          </li>
+
+
+        <li>
+          <a href="<?php echo base_url('cms/admin/ambassador_batchcode') ?>"
+            class="<?php echo $this->uri->segment(1) === 'cms' && ($this->uri->segment(2) === 'admin' && $this->uri->segment(3) === 'ambassador_batchcode') ? 'active': ''; ?>">
+            <i class="fa fa-dropbox"></i>
+            <span>Batchcode Ambassador <br> Assignment</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="<?php echo base_url('cms/admin/areas') ?>"
+            class="<?php echo $this->uri->segment(1) === 'cms' && ($this->uri->segment(2) === 'admin' && $this->uri->segment(3) === 'areas') ? 'active': ''; ?>">
+            <i class="fa fa-map-marker"></i>
+            <span>Provinces / Areas</span>
           </a>
         </li>
 

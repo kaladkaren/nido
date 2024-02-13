@@ -81,17 +81,19 @@ class Registration_model_api extends Crud_model
 					      'current_brand_milk' => $data['current_brand_milk'],
 					      'registration_etimestamp' => $data['registration_etimestamp'],
 					      'province_id' => $data['province_id'],
-					      'city_id' => $data['city_id'],
-					      'brgy_id' => $data['brgy_id'],
+					      // 'city_id' => $data['city_id'],
+					      // 'brgy_id' => $data['brgy_id'],
+					      'city' => $data['city'],
+					      'barangay' => $data['barangay'],
 					      // 'signature' => $data['signature']
 					    ];
 		$this->db->insert('tbl_registration', $data_array);
     	$last_insert_id = $this->db->insert_id();
 
     	$child_age = explode(',', $data['child_age']);
-    	for ($i=0; $i < count($child_age); $i++) {
-	        $this->add_child_ages($last_insert_id, $data['child_age'][$i]);
-	    }
+    	foreach ($child_age as $value) {
+			$this->add_child_ages($last_insert_id, $value);
+		}
 
     	return $last_insert_id;
 	}

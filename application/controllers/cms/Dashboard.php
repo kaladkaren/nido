@@ -8,6 +8,7 @@ class Dashboard extends Admin_core_controller {
     parent::__construct();
 
     $this->load->model('cms/admin_model', 'admin_model');
+    $this->load->model('cms/registration_model', 'registration_model');
   }
 
   public function index()
@@ -19,9 +20,8 @@ class Dashboard extends Admin_core_controller {
   {
     $res = $this->admin_model->user_list();
 
-    $data['total_sales'] = 100;
-    $data['total_orders'] = 40;
-    $data['total_items'] = 60;
+    $data['total_registered'] = $this->registration_model->get_registration_count();
+    $data['ambassador_count'] = $this->admin_model->get_ambassador_count();;
     $data['total_pages'] = $this->admin_model->getTotalPages();
 
     // var_dump($res); die();

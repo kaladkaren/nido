@@ -27,6 +27,14 @@
                 <p><b>Filter by Registered Date: </b></p>
               </div>
 
+              <div class="col-md-2" style="text-align: left; font-style: bold;">
+                <p><b>Filter by Area: </b></p>
+              </div>
+
+              <div class="col-md-2" style="text-align: left; font-style: bold;">
+                <p><b>Filter by Ambassador: </b></p>
+              </div>
+
             </div>
 
             <form action="" method="GET">
@@ -39,14 +47,32 @@
                       <input type="date" name="to" placeholder="to" class="form-control"
                       value="<?php echo @$_GET['to'] ?>">
                   </div>
+
+                  <div class="col-md-2">
+                    <select class="form-control" name="province_id">
+                      <option value="">-- SELECT PROVINCE/AREA -- </option>
+                      <?php foreach (get_provinces($this) as $value) { ?>
+                        <option value="<?php echo $value->id; ?>" <?=@$_GET['province_id'] == $value->id ? 'selected' : '';?> ><?php echo $value->provDesc;?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+
+                  <div class="col-md-2">
+                    <select class="form-control" name="ambassador_id">
+                      <option value="">-- SELECT Ambassador -- </option>
+                      <?php foreach (get_users($this) as $value) { ?>
+                        <option value="<?php echo $value->id; ?>" <?=@$_GET['ambassador_id'] == $value->id ? 'selected' : '';?> ><?php echo $value->fname;?> <?php echo $value->lname;?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
                   
-                  <div class="col-md-6">
+                  <div class="col-md-4">
                       <input type="submit" value="Apply Filter" class="btn btn-info btn-sm">
                       <a href="<?php echo base_url('cms/registration') ?>">
                         <button class="btn btn-default btn-sm" type="button">Reset Filters</button>
                       </a>
 
-                      <a href="<?php echo base_url('cms/reports/export_sales?') . $this->input->server('QUERY_STRING'); ?>" class="btn btn-sm btn-success">
+                      <a href="<?php echo base_url('cms/registration/export_csv?') . $this->input->server('QUERY_STRING'); ?>" class="btn btn-sm btn-success">
                         <i class="fa fa-download"></i> Export CSV
                       </a>
                   </div>
@@ -99,11 +125,14 @@
                     <th>Lastname</th>
                     <th>Relationship</th>
                     <th>Contact #</th>
-                    <th>Email Address</th>
-                    <th>Number of 3-5yrs old Children</th>
+                    <th>Email</th>
+                    <th>Birthday</th>
+                    <th># of 3-5yrs old Children</th>
                     <th>Current Milk Brand</th>
                     <th>Registration Date</th>
-                    <th>Action</th>
+                    <th>Area</th>
+                    <th>Ambassador</th>
+                    <!-- <th>Action</th> -->
                   </tr>
                 </thead>
                 <tbody>
@@ -113,31 +142,22 @@
                     <?php $i = 1; foreach ($res as $key => $value): ?>
                       <tr>
                         <th scope="row"><?php echo $value->id ?></th>
-                        <th><?php echo $value->ref_num ?></th>
-                        <td><?php echo $value->checkout_date_f ?></th>
-                        <td><?php echo $value->delivered_date_f ?></th>
-
-                        <td><?php echo $value->user->fname ?> <?php echo $value->user->lname ?></td>
+                        <td><?php echo $value->fname; ?></td>
+                        <td><?php echo $value->lname; ?></th>
+                        <td><?=$value->relationship == 1 ? 'Parent' : 'Guardian'; ?></td>
+                        <td><?php echo $value->contact_num; ?></td>
+                        <td><?php echo $value->email; ?></td>
+                        <td><?php echo $value->birthday_f; ?></td>
+                        <td><?php echo $value->number_of_children; ?></td>
+                        <td><?php echo $value->current_brand_milk; ?></td>
+                        <td><?php echo $value->registration_etimestamp; ?></td>
                         <td>
-                          <?php echo $value->user->email ?><br>
-                          <?php echo $value->user->mnum ?><br><br>
-                          <?php echo $value->shipping_address->address_concat ?><br>
+                          <b><?php echo $value->provDesc; ?></b><br>
+                          <i><?php echo $value->city; ?></i><br>
+                          <i><?php echo $value->barangay; ?></i><br>
                         </td>
-
-                        <td width="100%">
-                          <?php foreach ($value->cart_items as $item) { ?>
-                            <b>Item Name:</b> <?php echo $item->product->product_name; ?><br>
-                            <b>Quantity:</b> <?php echo $item->quantity; ?><br>
-                            <b>Base Price:</b> <?php echo $item->base_price; ?><br><br>
-
-                          <?php } ?>
-                        </td>
-                         
-                        <td><?php echo $value->total_amount ?></td>
-                        <td><?php echo $value->status; ?></td>
-                        <!-- <td><?php echo $value->payment_method ?></td> -->
-
-                        <td>
+                        <td><?php echo $value->ambassador_name; ?></td>
+                        <!-- <td>
                             <input type="hidden" data-payload='<?php echo json_encode($value, JSON_HEX_APOS|JSON_HEX_QUOT); ?>'>
 
                             <button style="margin-bottom: 5px;" type="button" class="edit-row btn btn-info btn-xs"><i class="fa fa-eye"></i> View Details</button><br>
@@ -146,9 +166,9 @@
                               <i class="fa fa-book"></i> View Remarks
                             </button><br>
 
-                        </td>
-                        </tr>
-                      <?php endforeach; ?>
+                        </td> -->
+                      </tr>
+                    <?php endforeach; ?>
 
 
                     <?php else: ?>
@@ -158,12 +178,14 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
+                        <td></td>
                         <td style="text-align: center;">Empty Table</td>
-                        
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
+
                       </tr>
                     <?php endif; ?>
                   </tbody>
@@ -440,7 +462,7 @@
   <script type="text/javascript">
     $(document).ready(function(){
       $('#dynamic-table2').dataTable( {
-        "aaSorting": [[ 2, "desc" ]]
+        "aaSorting": [[ 0, "desc" ]]
       } );
     });
 
