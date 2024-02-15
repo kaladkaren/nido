@@ -12,8 +12,19 @@ class Admin_model extends Admin_core_model
     $this->per_page = 15;
   }
 
+  public function getEmail($email)
+  {
+    return $this->db->get_where($this->table, array('email' => $email))->row();
+  }
+
   public function add($data)
   {
+    $check = $this->getEmail($data['email']);
+
+    if($check){
+      return false;
+    }
+
     $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
     $this->db->insert($this->table, $data);
     return $this->db->insert_id();
@@ -187,9 +198,22 @@ class Admin_model extends Admin_core_model
   # PROVINCES
   public function provinces_list()
   {
+    // $this->db->order_by("provDesc ASC, active DESC");
     $res = $this->db->get('refprovince')->result();
 
     return $res;
+  }
+
+  public function deactivate_province($id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->update('refprovince', ['active' => 0]);
+  }
+
+  public function activate_province($id)
+  {
+    $this->db->where('id', $id);
+    return $this->db->update('refprovince', ['active' => 1]);
   }
 
 }

@@ -12,7 +12,10 @@
                 <b>ADD AMBASSADOR ASSIGNMENT</b>
                 <?php if ($flash_msg = $this->session->flash_msg): ?>
                   <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-                <?php endif; ?>
+                <?php 
+                  $this->session->unset_userdata('flash_msg');
+                  endif; 
+                ?>
               </header>
               <div class="panel-body">
                 <form role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url('cms/admin/add_batchcode_assignment/') ?>">
@@ -218,7 +221,7 @@
     let p = prompt("Are you sure you want to delete this? Type DELETE to continue", "");
     if (p === 'DELETE') {
       const id = $(this).data('id')
-      invokeForm(base_url + 'cms/admin/delete__batchcode_assignment', {id: id});
+      invokeForm(base_url + 'cms/admin/delete_batchcode_assignment', {id: id});
     }
   })
 

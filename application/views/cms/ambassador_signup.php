@@ -8,7 +8,7 @@
   <meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
   <!-- <link rel="shortcut icon" href="img/favicon.png"> -->
 
-  <title>NIDO CMS LOGIN</title>
+  <title>Ambassador Sign-up</title>
 
   <!-- Bootstrap core CSS -->
   <link href="<?php echo base_url('public/admin/') ?>css/bootstrap.min.css" rel="stylesheet">
@@ -49,6 +49,10 @@
     text-decoration: none;
     color: #FFFFFF;
   }
+
+  .form-signin{
+    max-width: 500px !important; margin: 50px auto 0 !important;
+  }
   </style>
   <script type="text/javascript">
   const base_url = '<?php echo base_url(); ?>';
@@ -57,31 +61,77 @@
 
 <body class="login-body">
   <div class="container">
-    <form class="form-signin" method="post" action="<?php echo base_url('cms/login/attempt') ?>">
+    <form class="form-signin" method="post" action="<?php echo base_url('cms/login/register') ?>">
       <h2 class="form-signin-heading" style="background: dimgray;">
-        <img src="<?php echo base_url('public/admin/'); ?>img/nido_logo.png" alt="nido-logo" style="max-height:80px; margin: 0 10px;"> CMS LOGIN 
+        <!-- <img src="<?php echo base_url('public/admin/'); ?>img/nido_logo.png" alt="nido-logo" style="max-height:80px; margin: 0 10px;">  -->
+        Ambassador Registration
       </h2>
-      <div class="login-wrap">
-        <label>EMAIL ADDRESS:</label>
-        <input type="text" name="email" class="form-control" placeholder="Email" autofocus>
+      <div class="login-wrap"> 
 
-        <label>PASSWORD:</label>
-        <input type="password" name="password" class="form-control" placeholder="Password">
+        <?php if ($flash_msg = $this->session->flash_msg): ?>
+          <p style="color: <?php echo $flash_msg['color'] ?>; text-align: center; font-weight: bold; font-size: 16px;"><?php echo $flash_msg['message'] ?>
+            <br><br>
+          </p>
+        <?php 
+          $this->session->unset_userdata('flash_msg');
+          endif; 
+        ?>
         
-        <?php if ($login_msg = $this->session->login_msg): ?>
-          <p style="color: <?php echo $login_msg['color'] ?>"><?php echo $login_msg['message'] ?></p>
-        <?php endif; ?>
-        <button style="background: dimgray; box-shadow: 0px 4px #908f8f"
-        class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+        <form role="form" method="post" id="main-form" action="<?php echo base_url('cms/login/register') ?>">
+          <div class="form-group">
+          <label >First Name</label>
+            <input type="text" class="form-control" name="fname" placeholder="First name" required>
+          </div>
 
-        <p style="color: black;"><small>Don't have ambassador account? <br>Sign up <a href="<?php echo base_url('cms/login/ambassador_signup')?>" style="color: blue;">here</a>.</small></p>
+          <div class="form-group">
+            <label >Name</label>
+            <input type="text" class="form-control" name="lname" placeholder="Last name" required>
+          </div>
+
+          <div class="form-group">
+            <label >Email address</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" required>
+          </div>
+
+          <div class="form-group">
+            <label >Password</label>
+            <input type="password" class="form-control" name="password" placeholder="New Password" required>
+          </div>
+
+          <div class="form-group">
+            <label>Confirm Password</label>
+            <input type="password" class="form-control" id="confirm_password" placeholder="Confirm New Password" required>
+          </div>
+
+          <button class="btn btn-lg btn-success btn-block" type="submit">REGISTER</button>
+        </form>
+
+        <br>
+        <p style="color: black;"><small>Back to <a href="<?php echo base_url('cms/login')?>" style="color: blue; text-decoration: underline;">login</a> page.</small></p>
+
       </div>
     </form>
   </div>
+
+  
   <!-- js placed at the end of the document so the pages load faster -->
   <script src="<?php echo base_url('public/admin/') ?>js/jquery.js"></script>
   <script src="<?php echo base_url('public/admin/') ?>js/bootstrap.min.js"></script>
   <!-- <script src="<?php echo base_url('public/admin/js/custom/') ?>login.js"></script> -->
+
+  <script type="text/javascript">
+     $('#main-form').on('submit', function (){
+
+      let p = $('input[name=password]').val()
+      let cp = $('input[id=confirm_password]').val()
+
+      if (!(p === cp)) {
+        alert('Passwords don\'t match')
+        return false
+      }
+
+    });
+  </script>
 
 </body>
 </html>

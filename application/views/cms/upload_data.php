@@ -12,7 +12,10 @@
               <sub><strong>Please download CSV Template guide for uploading multiple registration.</strong></sub>
               <?php if ($flash_msg = $this->session->flash_msg): ?>
                 <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-              <?php endif; ?>
+              <?php 
+                $this->session->unset_userdata('flash_msg');
+                endif; 
+              ?>
             </header>
 
             <div class="row">

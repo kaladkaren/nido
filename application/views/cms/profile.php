@@ -8,7 +8,10 @@
             <b>PROFILE</b>
             <?php if ($flash_msg = $this->session->flash_msg): ?>
               <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-            <?php endif; ?>
+            <?php 
+              $this->session->unset_userdata('flash_msg');
+              endif; 
+            ?>
           </header>
           
           <div class="panel-body">
@@ -75,7 +78,10 @@
             <b>LIST OF YOUR REGISTRATION DATA</b>
             <?php if ($flash_msg = $this->session->flash_msg): ?>
               <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-            <?php endif; ?>
+            <?php 
+              $this->session->unset_userdata('flash_msg');
+              endif; 
+            ?>
           </header>
 
           <div class="panel-body">
@@ -156,12 +162,15 @@
                         <td></td>
                         <td></td>
                         <td></td>
+                        <td></td>
                         <td style="text-align: center;">Empty Table</td>
                         
                         <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
+                        
+
                       </tr>
                     <?php endif; ?>
                   </tbody>

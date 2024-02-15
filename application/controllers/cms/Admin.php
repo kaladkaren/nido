@@ -45,7 +45,7 @@ class Admin extends Admin_core_controller {
     } else {
       $this->session->set_flashdata('flash_msg', ['message' => 'Error adding user. Email already exists.', 'color' => 'red']);
     }
-    $this->admin_redirect('cms');
+    $this->admin_redirect('cms/admin');
   }
 
   public function update($id)
@@ -55,7 +55,7 @@ class Admin extends Admin_core_controller {
     } else {
       $this->session->set_flashdata('flash_msg', ['message' => 'Error updating user.', 'color' => 'red']);
     }
-    $this->admin_redirect('cms');
+    $this->admin_redirect('cms/admin');
   }
 
   public function deactivate()
@@ -65,7 +65,7 @@ class Admin extends Admin_core_controller {
     } else {
       $this->session->set_flashdata('flash_msg', ['message' => 'Error deactivating user.', 'color' => 'red']);
     }
-    $this->admin_redirect('cms');
+    $this->admin_redirect('cms/admin');
   }
 
   public function activate()
@@ -75,7 +75,7 @@ class Admin extends Admin_core_controller {
     } else {
       $this->session->set_flashdata('flash_msg', ['message' => 'Error activating user.', 'color' => 'red']);
     }
-    $this->admin_redirect('cms');
+    $this->admin_redirect('cms/admin');
   }
 
   # ESO
@@ -219,6 +219,26 @@ class Admin extends Admin_core_controller {
     $data['total_pages'] = count($res);
     
     $this->wrapper('cms/provinces', $data);
+  }
+
+  public function deactivate_province()
+  {
+    if($this->admin_model->deactivate_province($this->input->post('id', true))){
+      $this->session->set_flashdata('flash_msg', ['message' => 'Province deactivated successfully', 'color' => 'green']);
+    } else {
+      $this->session->set_flashdata('flash_msg', ['message' => 'Error deactivating province.', 'color' => 'red']);
+    }
+    $this->admin_redirect('cms/admin/areas');
+  }
+
+  public function activate_province()
+  {
+    if($this->admin_model->activate_province($this->input->post('id', true))){
+      $this->session->set_flashdata('flash_msg', ['message' => 'Province activated successfully!', 'color' => 'green']);
+    } else {
+      $this->session->set_flashdata('flash_msg', ['message' => 'Error activating province.', 'color' => 'red']);
+    }
+    $this->admin_redirect('cms/admin/areas');
   }
 
 }

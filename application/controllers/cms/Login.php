@@ -8,6 +8,7 @@ class Login extends Admin_core_controller {
     parent::__construct();
 
     $this->load->model('cms/login_model', 'login');
+    $this->load->model('cms/admin_model');
   }
 
   public function index()
@@ -36,7 +37,7 @@ class Login extends Admin_core_controller {
 
     $res = $this->login->getByEmail($email);
     if($res && password_verify($password, $res->password)){
-      $this->session->set_userdata(['role' => 'administrator', 'id' => $res->id, 'fname' => $res->fname]);
+      $this->session->set_userdata(['role' => 'administrator', 'id' => $res->id, 'fname' => $res->fname, 'role_id' => $res->role]);
       redirect('cms/dashboard');
     } else {
       $this->session->set_flashdata('login_msg', ['message' => 'Incorrect email or password', 'color' => 'red']);
@@ -45,5 +46,22 @@ class Login extends Admin_core_controller {
 
   }
 
+  public function ambassador_signup()
+  {
+    $this->load->view('cms/ambassador_signup');
+  }
+
+  public function register()
+  {
+    $input = $this->input->post(null, true);
+    $input['role'] = 2;
+    if($this->admin_model->add($input)){
+      $this->session->set_flashdata('flash_msg', ['message' => 'Successfully registered, you may now login.', 'color' => 'green']);
+    } else {
+      $this->session->set_flashdata('flash_msg', ['message' => 'Error registration. Email you have entered already exist.', 'color' => 'red']);
+    }
+
+    redirect('cms/login/ambassador_signup');
+  }
 
 }

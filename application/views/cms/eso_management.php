@@ -16,7 +16,10 @@
                 <b>ADD ESO</b>
                 <?php if ($flash_msg = $this->session->flash_msg): ?>
                   <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-                <?php endif; ?>
+                <?php 
+                  $this->session->unset_userdata('flash_msg');
+                  endif; 
+                ?>
               </header>
               <div class="panel-body">
                 <form role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url('cms/admin/add_eso/') ?>">
@@ -120,7 +123,10 @@
                 <b>ADD BATCHCODE</b>
                 <?php if ($flash_msg = $this->session->flash_msg): ?>
                   <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-                <?php endif; ?>
+                <?php 
+                  $this->session->unset_userdata('flash_msg');
+                  endif; 
+                ?>
               </header>
               <div class="panel-body">
                 <form role="form" method="post" enctype="multipart/form-data" action="<?php echo base_url('cms/admin/add_batchcode/') ?>">

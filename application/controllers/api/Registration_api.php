@@ -49,6 +49,7 @@ class Registration_api extends Crud_controller
 				      'email' => $data['email'][$i],
 				      'birthday' => $data['birthday'][$i],
 				      'relationship' => $data['relationship'][$i],
+              'relationship_label' => $data['relationship_label'][$i],
 				      'number_of_children' => $data['number_of_children'][$i],
               'child_age' => $data['child_age'][$i],
 				      'current_brand_milk' => $data['current_brand_milk'][$i],

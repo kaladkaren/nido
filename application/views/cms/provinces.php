@@ -9,7 +9,10 @@
             <b>PROVINCES / AREAS</b>
             <?php if ($flash_msg = $this->session->flash_msg): ?>
               <br><sub style="color: <?php echo $flash_msg['color'] ?>"><?php echo $flash_msg['message'] ?></sub>
-            <?php endif; ?>
+            <?php 
+              $this->session->unset_userdata('flash_msg');
+              endif; 
+            ?>
           </header>
 
           <div class="panel-body">
@@ -21,6 +24,9 @@
                     <th>PROVINCES ID</th>
                     <th>PROVINCE NAME</th>
                     <th>PROVINCE CODE</th>
+                    <?php if($this->session->userdata('role_id') == 1) : ?>
+                      <th>ACTION</th>
+                    <?php endif; ?>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,6 +38,18 @@
                         <th scope="row"><?php echo $value->id ?></th>
                         <th><?php echo $value->provDesc; ?></th>
                         <th><?php echo $value->provCode; ?></th>
+                        <?php if($this->session->userdata('role_id') == 1) : ?>
+                          <th>
+                            <?php if($value->active == 0){?>
+                              <button type="button" data-id='<?php echo $value->id; ?>'
+                                class="btn btn-activate btn-success btn-xs"><i class="fa fa-check"></i> Activate</button>
+                            <?php }else{ ?>
+                              <button type="button" data-id='<?php echo $value->id; ?>'
+                                class="btn btn-deactivate btn-danger btn-xs"><i class="fa fa-times"></i> Deactivate</button>
+                              </td>
+                            <?php } ?>
+                          </th>
+                        <?php endif; ?>
                       </tr>
                     <?php endforeach; ?>
 
@@ -66,10 +84,31 @@
       return false
     }
 
+  });
+
+  //Deleting
+  $('.btn-deactivate').on('click', function(){
+
+    let p = prompt("Are you sure you want to deactivate this access? Type YES to continue", "");
+    if (p === 'YES') {
+      const id = $(this).data('id')
+
+      invokeForm(base_url + 'cms/admin/deactivate_province', {id: id});
+    }
+
+  })
+
+  $('.btn-activate').on('click', function(){
+
+    let p = prompt("Are you sure you want to activate this access? Type YES to continue", "");
+    if (p === 'YES') {
+      const id = $(this).data('id')
+
+      invokeForm(base_url + 'cms/admin/activate_province', {id: id});
+    }
+
   })
 </script>
-
-<script src="<?php echo base_url('public/admin/js/custom/') ?>generic.js"></script>
 
 <script src="<?php echo base_url('public/admin/js/custom/') ?>generic.js"></script>
 <script type="text/javascript" src="<?php echo base_url('public/admin/'); ?>assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>

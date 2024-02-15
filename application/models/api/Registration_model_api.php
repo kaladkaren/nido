@@ -76,6 +76,7 @@ class Registration_model_api extends Crud_model
 					      'email' => $data['email'],
 					      'birthday' => $data['birthday'],
 					      'relationship' => $data['relationship'],
+					      'relationship_label' => $data['relationship_label'],
 					      'number_of_children' => $data['number_of_children'],
 					      'child_ages' => $data['child_age'],
 					      'current_brand_milk' => $data['current_brand_milk'],
