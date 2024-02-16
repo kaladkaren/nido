@@ -147,7 +147,11 @@
                         <th scope="row"><?php echo $value->id ?></th>
                         <td><?php echo $value->fname; ?></td>
                         <td><?php echo $value->lname; ?></th>
-                        <td><?=$value->relationship == 1 ? 'Parent' : 'Guardian'; ?></td>
+                        <td>
+                          <?=$value->relationship == 1 ? 'Parent' : 'Guardian'; ?>
+                          <br>
+                          > <?php echo $value->relationship_label; ?>
+                        </td>
                         <td><?php echo $value->contact_num; ?></td>
                         <td><?php echo $value->email; ?></td>
                         <td><?php echo $value->birthday_f; ?></td>

@@ -125,6 +125,7 @@ class Registration_model extends Admin_core_model
                 'email' => $data['email'],
                 'birthday' => $data['birthday'],
                 'relationship' => $data['relationship'],
+                'relationship_label' => $data['relationship_label'],
                 'number_of_children' => $data['number_of_children'],
                 'current_brand_milk' => $data['current_brand_milk'],
                 'registration_etimestamp' => $data['registration_etimestamp'],
@@ -209,13 +210,14 @@ class Registration_model extends Admin_core_model
       $data['email'] = $value[3];
       $data['birthday'] = date('Y-m-d', strtotime($value[4])); //$value[4];
       $data['relationship'] = $value[5];
-      $data['number_of_children'] = $value[6];
-      $data['child_age'] = explode(',', $value[7]);
-      $data['current_brand_milk'] = $value[8];
-      $data['registration_etimestamp'] = date('Y-m-d', strtotime($value[9]));
-      $data['province_id'] = $value[10];
-      $data['city'] = $value[11];
-      $data['barangay'] = $value[12];
+      $data['relationship_label'] = $value[6];
+      $data['number_of_children'] = $value[7];
+      $data['child_age'] = explode(',', $value[8]);
+      $data['current_brand_milk'] = $value[9];
+      $data['registration_etimestamp'] = date('Y-m-d', strtotime($value[10]));
+      $data['province_id'] = $value[11];
+      $data['city'] = $value[12];
+      $data['barangay'] = $value[13];
 
       $last_entry_id = $this->add_registration($this->session->userdata('id'), $data);
 

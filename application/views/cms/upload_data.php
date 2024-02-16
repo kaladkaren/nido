@@ -99,6 +99,7 @@
                                   <th>email</th>
                                   <th>birthday</th>
                                   <th>relationship</th>
+                                  <th>relationship label</th>
                                   <th>number of 3-5 yrs old children</th>
                                   <th>childrens ages</th>
                                   <th>current brand of milk</th>
@@ -117,6 +118,7 @@
                                     <td>delacruz@gmail.com</td>
                                     <td>1998-01-31</td>
                                     <td>1</td>
+                                    <td>Mother</td>
                                     <td>2</td>
                                     <td>5, 4</td>
                                     <td>Bonakid</td>

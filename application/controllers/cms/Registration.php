@@ -54,7 +54,7 @@ class Registration extends Admin_core_controller {
     // create a file pointer connected to the output stream
     $file = fopen('php://output', 'w');
     // send the column headers
-    fputcsv($file, array('#', 'First Name', 'Lastname', 'Relationship', 'Contact #', 'Email', 'Birthday', '# of 3-5yrs old Children', 'Children Ages', 'Current Milk Brand', 'Registration Date', 'Province/Area', 'Ambassador'));
+    fputcsv($file, array('#', 'First Name', 'Lastname', 'Relationship', 'Relationship Label', 'Contact #', 'Email', 'Birthday', '# of 3-5yrs old Children', 'Children Ages', 'Current Milk Brand', 'Registration Date', 'Province/Area', 'Ambassador'));
   
     $result = $this->registration_model->registration_data();
 
@@ -69,6 +69,7 @@ class Registration extends Admin_core_controller {
         $value->fname,
         $value->lname,
         $relationship,
+        $value->relationship_label,
         $value->contact_num,
         $value->email,
         $value->birthday_f,
